@@ -2,7 +2,7 @@
 
 The .ino code file is in the DoorCloser folder. Ready to upload to Arduino.
 
-## Components:
+### Components:
 - Straight Link Piece, 7cm
 - Shaft Coupler
 - NEMA 17 Motor with 51:1 Gearbox
@@ -11,3 +11,6 @@ The .ino code file is in the DoorCloser folder. Ready to upload to Arduino.
 - 9v Battery Pack
 - AVAWO DC 24V Power Supply
 - DM542T Stepper Motor Driver
+
+### Video:
+https://youtu.be/dEi9sOcBnoI
