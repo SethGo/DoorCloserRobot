@@ -1,7 +1,6 @@
 #define dirPin 2
 #define stepPin 3
 #define delayLength 280
-
 #define irPin 7
 int irVal;
 unsigned long time1;
