@@ -16,5 +16,5 @@ Kinematic and Schematic diagrams are also available in this repo.
 - AVAWO DC 24V Power Supply
 - DM542T Stepper Motor Driver
 
-### Video:
+### Video Demonstration:
 https://youtu.be/dEi9sOcBnoI
