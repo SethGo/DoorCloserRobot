@@ -1,32 +1,31 @@
+#define dirPin 2
+#define stepPin 3
+#define delayLength 280
+#define fullTurn 40
+
+#define irPin 7
+int irVal;
 unsigned long time1;
 unsigned long time2;
-const int irPin = 7; //the ir obstacle sensor attach to pin 7
-#define waiting_time 10
-#define stepper PORTB
 
-void setup()
-{
-  //set the irPin as INPUT
-  pinMode(irPin, INPUT);
-
-
-//  // Set pins 8,9,10,11 as output for driving the step motor
-//  for (int z = 9; z < 13; z++) {  // Full step drive
-//    pinMode(z, OUTPUT);
-//  }
-
-  // Set pins 8,9,10,11 as output for driving the step motor
-  for (int z = 5; z < 9; z++) {  // Full step drive
-    pinMode(z, OUTPUT);
-  }
-
+void setup() {
   // For console logging
   Serial.begin(9600);
+  
+  //set the irPin as INPUT
+  pinMode(irPin, INPUT);
+  
+  // Declare stepper pins as output:
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
+
+  // Initialize all stepper pins off
+  digitalWrite(stepPin, LOW);
+  digitalWrite(dirPin, LOW);
 }
 
-void loop() {
+void loop() {  
   // Read the value of IR Sensor (1 = no obstacle, 0 = obstacle)
-  
   boolean irVal = digitalRead(irPin); 
   time1 = millis();
   while (irVal == 0) {
@@ -34,36 +33,40 @@ void loop() {
     time2 = millis();
     // If there has been an obstacle detected for more than 3 seconds
     if (time2 > time1 + 3000 && irVal == 0) {
-      runMotor();
-      return;
+      closeDoor(irVal);
     }
   }
-  runMotor();
 }
 
-
-void runMotor() {
-  // Close the door
-  for (int steps = 0; steps < 320; steps++) {
-    stepper = 0B0011;
-    delay(waiting_time);
-    stepper = 0B0110;
-    delay(waiting_time);
-    stepper = 0B1100;
-    delay(waiting_time);
-    stepper = 0B1001;
-    delay(waiting_time);
-  }
-
-  // Return the arm
-  for (int steps = 0; steps < 320; steps++) {
-    stepper = 0B1001;
-    delay(waiting_time);
-    stepper = 0B1100;
-    delay(waiting_time);
-    stepper = 0B0110;
-    delay(waiting_time);
-    stepper = 0B0011;
-    delay(waiting_time);
-  }
-}
+void closeDoor(int ir) {
+  // Set the spinning direction CW
+  digitalWrite(dirPin, LOW);
+  unsigned int stepCount = 0;
+  unsigned int push = 900;
+  
+  while (ir == 0) {
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(delayLength);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(delayLength);
+    stepCount++;
+    ir = digitalRead(irPin);
+   }
+   
+   // Push a little more after the sensor reads 'no obstacle'
+   for (int s=0; s<=push; s++) {
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(delayLength);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(delayLength);
+    }
+   
+  // Set the spinning direction CCW and return arm
+  digitalWrite(dirPin, HIGH);
+  for (int s=0; s<=stepCount + push; s++) {
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(delayLength/3);
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(delayLength/3);
+    }
+ }
