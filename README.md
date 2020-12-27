@@ -4,6 +4,7 @@ There are many door closing devices on the market and nearly all of them feature
 ----------
 
 The .ino code file is in the DoorCloser folder. Ready to upload to Arduino.
+Kinematic and Schematic diagrams are also available.
 
 ### Components:
 - Straight Link Piece, 7cm
