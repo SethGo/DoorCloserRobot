@@ -1,7 +1,6 @@
 #define dirPin 2
 #define stepPin 3
 #define delayLength 280
-#define fullTurn 40
 
 #define irPin 7
 int irVal;
