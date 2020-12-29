@@ -42,6 +42,7 @@ void closeDoor(int ir) {
   unsigned int stepCount = 0;
   unsigned int push = 900;
   
+  // Begin moving to close the door
   while (ir == 0) {
     digitalWrite(stepPin, HIGH);
     delayMicroseconds(delayLength);
