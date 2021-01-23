@@ -2,7 +2,7 @@
 There are many door closing devices on the market and nearly all of them feature one major inefficiency. The functional mechanism exerts closing-direction force on the door at all times, including when the door is being opened by a human. Fully electronic doors which require no human effort exist but are prohibitively expensive for residential applications. A reactive robot prototype was built and tested to address this inefficiency. Through use of an Infra-Red obstacle detection sensor, the robot is able to detect when a door has been left ajar  and only then will it exert force to close the door.
 
 ### Video Demonstration:
-https://youtu.be/dEi9sOcBnoI
+https://youtu.be/dEi9sOcBnoI?t=12
 
 ----------
 
